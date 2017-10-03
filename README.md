@@ -231,3 +231,57 @@ Refresh the page and look at the console output. You should be greeted with the 
 ````
 AMP validation successful.
 ````
+###Navigate with a sidebar
+A common navigation technique is to add a menu icon that when clicked reveals a set of navigation links (from the side of the page). In AMP, we can create such navigation with the amp-sidebar component.
+
+First, we must add the amp-sidebar component’s JavaScript to the <head> tag:
+````
+<script async custom-element="amp-sidebar" src="https://cdn.ampproject.org/v0/amp-sidebar-0.1.js"></script>
+````
+Next, we want to display a menu icon. When the icon is tapped, it will open the sidebar. Replace the \<header> with the following code to display a "hamburger" icon instead of a home icon:
+````
+<header class="headerbar">
+  <div role="button" on="tap:sidebar1.toggle" tabindex="0" class="hamburger">☰</div>
+  <div class="site-name">News Site</div>
+</header>
+````
+In the above code, we toggle the sidebar through the on action attribute on the amp-sidebar element, which is identified by the sidebar1 ID. Let's add the sidebar.
+
+Add the following HTML just after the \</header>:
+
+````
+<amp-sidebar id="sidebar1" layout="nodisplay" side="left">
+  <div role="button" aria-label="close sidebar" on="tap:sidebar1.toggle" tabindex="0" class="close-sidebar">✕</div>
+  <ul class="sidebar">
+    <li><a href="#">Example 1</a></li>
+    <li><a href="#">Example 2</a></li>
+    <li><a href="#">Example 3</a></li>
+  </ul>
+</amp-sidebar>
+````
+Our sidebar will be hidden, but when the user taps the hamburger icon, the menu will appear from the left side of the screen. To close the menu, the user can tap the X icon.
+
+Finally, add these style rules to your inline CSS:
+
+````
+.hamburger {
+  padding-left: 10px;
+}      
+.sidebar {
+  padding: 10px;
+  margin: 0;
+}
+.sidebar > li {
+  list-style: none;
+  margin-bottom:10px;
+}
+.sidebar a {
+  text-decoration: none;
+}
+.close-sidebar {
+  font-size: 1.5em;
+  padding-left: 5px;
+}
+````
+
+Finish your project by committing your code and creating a pull request
